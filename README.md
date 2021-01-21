@@ -1,7 +1,7 @@
 # sample-lwc-rabbitmq
 
 # LightWave Client RabbitMQ Sample
-This LightWave sample illustrates how to publish and get messages from queues on a
+This LightWave Client sample illustrates how to publish and get messages from queues on a
 [RabbitMQ](https://www.rabbitmq.com/) instance. This sample may be used as a basis for
 developing custom appications that work with RabbitMQ.
 
@@ -14,7 +14,7 @@ developing custom appications that work with RabbitMQ.
 ## Sample Prerequisites
 
 + NonStop C Compiler.
-+ An installed instance of [LightWave Client](https://docs.nuwavetech.com/display/LWCLIENT) version 1.0.6 or greater.
++ An installed instance of [LightWave Client](https://docs.nuwavetech.com/display/LWCLIENT) version 1.1.2 or greater.
 + An installed RabbitMQ instance. The vhost, queue, routing-key names and queue credentials must be known.
 
 *Note: LightWave Client does not support the use of '/' as a URI path parameter and is not able to invoke
@@ -129,7 +129,7 @@ LightWave Client(tm) - RabbitMQ sample client.
 Request completed in 0.056043 seconds.
 
 ```
-When done with the sample, stop the LightWave Client Pathway
+When done with the sample, stop the LightWave Client Pathway.
 ```
 TACL> RUN STOPPW
 ```
