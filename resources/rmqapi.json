@@ -1,0 +1,789 @@
+{
+  "name": "sample-lwc-rabbitmq",
+  "description": "RabbitMQ sample API",
+  "version": 1,
+  "id": "036678198669061d7c8001010000012ef1",
+  "modificationTime": 1611267554,
+  "isBrief": false,
+  "operations": [
+    {
+      "path": "/api/exchanges/{vhost}/{name}/publish",
+      "methods": [
+        {
+          "api": {
+            "stringPadding": "zeros"
+          },
+          "request": {
+            "mappings": [
+              {
+                "source": {
+                  "type": "ipm",
+                  "data": "64"
+                },
+                "target": {
+                  "type": "path",
+                  "value": "{vhost}"
+                }
+              },
+              {
+                "source": {
+                  "type": "ipm",
+                  "data": "64"
+                },
+                "target": {
+                  "type": "path",
+                  "value": "{name}"
+                }
+              },
+              {
+                "source": {
+                  "type": "ipm"
+                },
+                "target": {
+                  "type": "body",
+                  "value": "PubStringRq"
+                }
+              }
+            ],
+            "contentType": "application/json",
+            "contentTypeIsCustom": false,
+            "acceptTypes": [
+              "*/*"
+            ]
+          },
+          "responses": [
+            {
+              "mappings": [
+                {
+                  "target": {
+                    "type": "ipm"
+                  },
+                  "source": {
+                    "type": "body",
+                    "value": "PubRp"
+                  }
+                }
+              ],
+              "httpStatus": "200",
+              "description": "Publish response"
+            },
+            {
+              "httpStatus": "*",
+              "description": "Error",
+              "mappings": [
+                {
+                  "target": {
+                    "type": "ipm"
+                  },
+                  "source": {
+                    "type": "body",
+                    "value": "ErrorRp"
+                  }
+                }
+              ]
+            }
+          ],
+          "verb": "POST",
+          "alias": "pub-string-msg",
+          "description": "Publish a string message to a given exchange.",
+          "id": 1
+        },
+        {
+          "api": {
+            "stringPadding": "zeros"
+          },
+          "request": {
+            "mappings": [
+              {
+                "source": {
+                  "type": "ipm",
+                  "data": "64"
+                },
+                "target": {
+                  "type": "path",
+                  "value": "{vhost}"
+                }
+              },
+              {
+                "source": {
+                  "type": "ipm",
+                  "data": "64"
+                },
+                "target": {
+                  "type": "path",
+                  "value": "{name}"
+                }
+              },
+              {
+                "source": {
+                  "type": "ipm"
+                },
+                "target": {
+                  "type": "body",
+                  "value": "PubBase64Rq"
+                }
+              }
+            ],
+            "contentType": "application/json",
+            "contentTypeIsCustom": false,
+            "acceptTypes": [
+              "*/*"
+            ]
+          },
+          "responses": [
+            {
+              "mappings": [
+                {
+                  "target": {
+                    "type": "ipm"
+                  },
+                  "source": {
+                    "type": "body",
+                    "value": "PubRp"
+                  }
+                }
+              ],
+              "httpStatus": "200",
+              "description": "Publish response."
+            },
+            {
+              "httpStatus": "*",
+              "description": "Error response",
+              "mappings": [
+                {
+                  "target": {
+                    "type": "ipm"
+                  },
+                  "source": {
+                    "type": "body",
+                    "value": "ErrorRp"
+                  }
+                }
+              ]
+            }
+          ],
+          "verb": "POST",
+          "alias": "pub-base64-msg",
+          "description": "Publish a base64 message to a given exchange.",
+          "id": 2
+        }
+      ]
+    },
+    {
+      "path": "/api/queues/{vhost}/{name}/get",
+      "methods": [
+        {
+          "api": {
+            "stringPadding": "zeros"
+          },
+          "request": {
+            "mappings": [
+              {
+                "source": {
+                  "type": "ipm",
+                  "data": "64"
+                },
+                "target": {
+                  "type": "path",
+                  "value": "{vhost}"
+                }
+              },
+              {
+                "source": {
+                  "type": "ipm",
+                  "data": "64"
+                },
+                "target": {
+                  "type": "path",
+                  "value": "{name}"
+                }
+              },
+              {
+                "source": {
+                  "type": "ipm"
+                },
+                "target": {
+                  "type": "body",
+                  "value": "GetRq"
+                }
+              }
+            ],
+            "contentType": "application/json",
+            "contentTypeIsCustom": false,
+            "acceptTypes": [
+              "*/*"
+            ]
+          },
+          "responses": [
+            {
+              "mappings": [
+                {
+                  "target": {
+                    "type": "ipm",
+                    "data": "16"
+                  },
+                  "source": {
+                    "type": "body",
+                    "value": "GetRp"
+                  }
+                }
+              ],
+              "httpStatus": "200",
+              "description": "Get Response"
+            },
+            {
+              "httpStatus": "*",
+              "description": "Error",
+              "mappings": [
+                {
+                  "target": {
+                    "type": "ipm"
+                  },
+                  "source": {
+                    "type": "body",
+                    "value": "ErrorRp"
+                  }
+                }
+              ]
+            }
+          ],
+          "verb": "POST",
+          "alias": "get-messages",
+          "description": "Get messages from a queue.",
+          "id": 3
+        }
+      ]
+    }
+  ],
+  "types": {
+    "type": {
+      "MessageType": {
+        "anonymous": true,
+        "elements": [
+          {
+            "name": "payload_bytes",
+            "type": "int"
+          },
+          {
+            "name": "redelivered",
+            "type": "boolean"
+          },
+          {
+            "name": "exchange",
+            "type": "string",
+            "size": 64
+          },
+          {
+            "name": "routing_key",
+            "type": "string",
+            "size": 64
+          },
+          {
+            "name": "message_count",
+            "type": "unsignedInt"
+          },
+          {
+            "name": "properties",
+            "type": "BasicProperties"
+          },
+          {
+            "name": "payload_encoding",
+            "type": "string",
+            "size": 64
+          },
+          {
+            "name": "payloadSize",
+            "type": "unsignedInt",
+            "size": 4,
+            "hide": true
+          },
+          {
+            "name": "payload",
+            "type": "base64Binary",
+            "size": 50000,
+            "sizeIs": "payloadSize"
+          }
+        ]
+      },
+      "BasicProperties": {
+        "anonymous": true,
+        "elements": [
+          {
+            "name": "cluster_id",
+            "type": "string",
+            "size": 32,
+            "hideIfEmpty": true
+          },
+          {
+            "name": "app_id",
+            "type": "string",
+            "size": 32,
+            "hideIfEmpty": true
+          },
+          {
+            "name": "user_id",
+            "type": "string",
+            "size": 32,
+            "hideIfEmpty": true
+          },
+          {
+            "name": "type",
+            "type": "string",
+            "size": 32,
+            "hideIfEmpty": true
+          },
+          {
+            "name": "timestamp",
+            "type": "unsignedInt",
+            "hideIfEmpty": true
+          },
+          {
+            "name": "message_id",
+            "type": "string",
+            "size": 32,
+            "hideIfEmpty": true
+          },
+          {
+            "name": "expiration",
+            "type": "string",
+            "size": 32,
+            "hideIfEmpty": true
+          },
+          {
+            "name": "reply_to",
+            "type": "string",
+            "size": 32,
+            "hideIfEmpty": true
+          },
+          {
+            "name": "correlation_id",
+            "type": "string",
+            "size": 32,
+            "hideIfEmpty": true
+          },
+          {
+            "name": "priority",
+            "type": "int",
+            "hideIfEmpty": true
+          },
+          {
+            "name": "delivery_mode",
+            "type": "int",
+            "hideIfEmpty": true
+          },
+          {
+            "name": "headers",
+            "type": "string",
+            "size": 32,
+            "hideIfEmpty": true,
+            "map": {
+              "maxOccurs": 10,
+              "keySize": 32
+            }
+          },
+          {
+            "name": "content_encoding",
+            "type": "string",
+            "size": 32,
+            "hideIfEmpty": true
+          },
+          {
+            "name": "content_type",
+            "type": "string",
+            "size": 32,
+            "hideIfEmpty": true
+          }
+        ]
+      },
+      "GetRq": {
+        "anonymous": false,
+        "elements": [
+          {
+            "name": "count",
+            "type": "unsignedInt"
+          },
+          {
+            "name": "ackmode",
+            "type": "string",
+            "size": 64
+          },
+          {
+            "name": "encoding",
+            "type": "string",
+            "size": 64
+          },
+          {
+            "name": "truncate",
+            "type": "unsignedInt",
+            "hideIfEmpty": true
+          }
+        ]
+      },
+      "GetRp": {
+        "anonymous": false,
+        "elements": [
+          {
+            "name": "msgCount",
+            "type": "short",
+            "hide": true
+          },
+          {
+            "name": "item",
+            "minOccurs": 1,
+            "maxOccurs": 10,
+            "dependsOn": "msgCount",
+            "type": "MessageType",
+            "wrapped": false
+          }
+        ]
+      },
+      "PubStringRq": {
+        "anonymous": false,
+        "elements": [
+          {
+            "name": "properties",
+            "type": "BasicProperties",
+            "hideIfEmpty": false
+          },
+          {
+            "name": "routing_key",
+            "type": "string",
+            "size": 64
+          },
+          {
+            "name": "payload_encoding",
+            "type": "string",
+            "size": 64
+          },
+          {
+            "name": "payload",
+            "type": "string",
+            "size": 50000
+          }
+        ]
+      },
+      "PubBase64Rq": {
+        "anonymous": false,
+        "elements": [
+          {
+            "name": "properties",
+            "type": "BasicProperties",
+            "hideIfEmpty": false
+          },
+          {
+            "name": "routing_key",
+            "type": "string",
+            "size": 64
+          },
+          {
+            "name": "payload_encoding",
+            "type": "string",
+            "size": 64
+          },
+          {
+            "name": "payloadSize",
+            "type": "unsignedInt",
+            "size": 4,
+            "hide": true
+          },
+          {
+            "name": "payload",
+            "type": "base64Binary",
+            "size": 50000,
+            "sizeIs": "payloadSize"
+          }
+        ]
+      },
+      "PubRp": {
+        "anonymous": false,
+        "elements": [
+          {
+            "name": "routed",
+            "type": "boolean"
+          }
+        ]
+      },
+      "ErrorRp": {
+        "anonymous": false,
+        "elements": [
+          {
+            "name": "error",
+            "type": "string",
+            "size": 128
+          },
+          {
+            "name": "reason",
+            "type": "string",
+            "size": 1024
+          }
+        ]
+      }
+    }
+  },
+  "generatedTypes": {
+    "WARNING": "These types are generated by LightWave Client and should not be manually edited.",
+    "type": {
+      "LightWaveRqHeader": {
+        "generated": true,
+        "lightwave": true,
+        "elements": [
+          {
+            "name": "rqCode",
+            "type": "short",
+            "size": 2
+          },
+          {
+            "name": "rqVersion",
+            "type": "unsignedShort",
+            "size": 2
+          },
+          {
+            "name": "rqTimeout",
+            "type": "unsignedInt",
+            "size": 4
+          },
+          {
+            "name": "reserved",
+            "type": "string",
+            "size": 24
+          }
+        ]
+      },
+      "LightWaveRpHeader": {
+        "generated": true,
+        "lightwave": true,
+        "elements": [
+          {
+            "name": "rpCode",
+            "type": "short",
+            "size": 2
+          },
+          {
+            "name": "httpStatus",
+            "type": "short",
+            "size": 2
+          },
+          {
+            "name": "infoCode",
+            "type": "short",
+            "size": 2
+          },
+          {
+            "name": "infoDetail",
+            "type": "short",
+            "size": 2
+          },
+          {
+            "name": "reserved",
+            "type": "string",
+            "size": 24
+          }
+        ]
+      },
+      "LightWaveErrorRp": {
+        "generated": true,
+        "lightwave": true,
+        "elements": [
+          {
+            "name": "LightWaveRpHeader",
+            "type": "LightWaveRpHeader"
+          },
+          {
+            "name": "errorSource",
+            "type": "int",
+            "size": 4
+          },
+          {
+            "name": "errorCode",
+            "type": "int",
+            "size": 4
+          },
+          {
+            "name": "errorSubcode",
+            "type": "int",
+            "size": 4
+          },
+          {
+            "name": "errorMessage",
+            "type": "string",
+            "size": 4096
+          }
+        ]
+      },
+      "Pub-string-msgRq": {
+        "generated": true,
+        "lightwave": false,
+        "isRequest": true,
+        "alias": "pub-string-msg",
+        "description": "Publish a string message to a given exchange.",
+        "operation": "POST /api/exchanges/{vhost}/{name}/publish",
+        "elements": [
+          {
+            "name": "LightWaveRqHeader",
+            "type": "LightWaveRqHeader"
+          },
+          {
+            "name": "vhost",
+            "type": "string",
+            "size": 64
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "size": 64
+          },
+          {
+            "name": "PubStringRq",
+            "type": "PubStringRq"
+          }
+        ]
+      },
+      "Pub-string-msg200Rp": {
+        "generated": true,
+        "lightwave": false,
+        "isReply": true,
+        "elements": [
+          {
+            "name": "LightWaveRpHeader",
+            "type": "LightWaveRpHeader"
+          },
+          {
+            "name": "PubRp",
+            "type": "PubRp"
+          }
+        ]
+      },
+      "Pub-string-msgOtherRp": {
+        "generated": true,
+        "lightwave": false,
+        "isReply": true,
+        "elements": [
+          {
+            "name": "LightWaveRpHeader",
+            "type": "LightWaveRpHeader"
+          },
+          {
+            "name": "ErrorRp",
+            "type": "ErrorRp"
+          }
+        ]
+      },
+      "Pub-base64-msgRq": {
+        "generated": true,
+        "lightwave": false,
+        "isRequest": true,
+        "alias": "pub-base64-msg",
+        "description": "Publish a base64 message to a given exchange.",
+        "operation": "POST /api/exchanges/{vhost}/{name}/publish",
+        "elements": [
+          {
+            "name": "LightWaveRqHeader",
+            "type": "LightWaveRqHeader"
+          },
+          {
+            "name": "vhost",
+            "type": "string",
+            "size": 64
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "size": 64
+          },
+          {
+            "name": "PubBase64Rq",
+            "type": "PubBase64Rq"
+          }
+        ]
+      },
+      "Pub-base64-msg200Rp": {
+        "generated": true,
+        "lightwave": false,
+        "isReply": true,
+        "elements": [
+          {
+            "name": "LightWaveRpHeader",
+            "type": "LightWaveRpHeader"
+          },
+          {
+            "name": "PubRp",
+            "type": "PubRp"
+          }
+        ]
+      },
+      "Pub-base64-msgOtherRp": {
+        "generated": true,
+        "lightwave": false,
+        "isReply": true,
+        "elements": [
+          {
+            "name": "LightWaveRpHeader",
+            "type": "LightWaveRpHeader"
+          },
+          {
+            "name": "ErrorRp",
+            "type": "ErrorRp"
+          }
+        ]
+      },
+      "Get-messagesRq": {
+        "generated": true,
+        "lightwave": false,
+        "isRequest": true,
+        "alias": "get-messages",
+        "description": "Get messages from a queue.",
+        "operation": "POST /api/queues/{vhost}/{name}/get",
+        "elements": [
+          {
+            "name": "LightWaveRqHeader",
+            "type": "LightWaveRqHeader"
+          },
+          {
+            "name": "vhost",
+            "type": "string",
+            "size": 64
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "size": 64
+          },
+          {
+            "name": "GetRq",
+            "type": "GetRq"
+          }
+        ]
+      },
+      "Get-messages200Rp": {
+        "generated": true,
+        "lightwave": false,
+        "isReply": true,
+        "elements": [
+          {
+            "name": "LightWaveRpHeader",
+            "type": "LightWaveRpHeader"
+          },
+          {
+            "name": "GetRp",
+            "type": "GetRp"
+          }
+        ]
+      },
+      "Get-messagesOtherRp": {
+        "generated": true,
+        "lightwave": false,
+        "isReply": true,
+        "elements": [
+          {
+            "name": "LightWaveRpHeader",
+            "type": "LightWaveRpHeader"
+          },
+          {
+            "name": "ErrorRp",
+            "type": "ErrorRp"
+          }
+        ]
+      }
+    }
+  }
+}

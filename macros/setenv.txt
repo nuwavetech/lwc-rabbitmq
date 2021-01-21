@@ -1,0 +1,9 @@
+?tacl macro
+
+== Set runtime environment. Customize this for your environment.
+
+#set #param pathmon-name        $NWRMQ
+#set #param server-class        RMQ
+#set #param lwc-isv             $vol.subvol
+#set #param base-url            https://<your-rabbitmq-host>:<15672>/
+#set #param http-credentials    username:password
