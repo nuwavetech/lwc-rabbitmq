@@ -442,8 +442,7 @@
         "elements": [
           {
             "name": "properties",
-            "type": "BasicProperties",
-            "hideIfEmpty": false
+            "type": "BasicProperties"
           },
           {
             "name": "routing_key",
@@ -467,8 +466,7 @@
         "elements": [
           {
             "name": "properties",
-            "type": "BasicProperties",
-            "hideIfEmpty": false
+            "type": "BasicProperties"
           },
           {
             "name": "routing_key",
