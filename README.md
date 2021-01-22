@@ -1,5 +1,3 @@
-# sample-lwc-rabbitmq
-
 # LightWave Client RabbitMQ Sample
 This LightWave Client sample illustrates how to publish and get messages from queues on a
 [RabbitMQ](https://www.rabbitmq.com/) instance. This sample may be used as a basis for
@@ -127,6 +125,14 @@ LightWave Client(tm) - RabbitMQ sample client.
 15 byte message retrieved: Hello again ...
 
 Request completed in 0.056043 seconds.
+
+TACL> run rmq get sample sample
+
+LightWave Client(tm) - RabbitMQ sample client.
+
+Queue 'sample' in vhost 'sample' empty.
+
+Request completed in 0.061849 seconds.
 
 ```
 When done with the sample, stop the LightWave Client Pathway.
